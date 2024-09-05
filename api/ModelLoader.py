@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import traceback
 
 
 class ModelLoader:
@@ -17,9 +18,10 @@ class ModelLoader:
             self.label_encoder = joblib.load(f'{self.model_path}/label_encoder.pkl')
             print("Model loaded successfully 👏")
         except FileNotFoundError as e:
-            print(f"Error loading files: {e}")
+            print(f"🚨 Error loading files: {e} 🚨")
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"🚨 An error occurred: {e} 🚨")
+            raise e
 
     def predict(self, new_data: pd.DataFrame):
         """Make predictions on new data."""
@@ -33,3 +35,4 @@ class ModelLoader:
         except Exception as e:
             print(f"An error occurred during prediction: {e}")
             raise
+

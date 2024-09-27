@@ -1,12 +1,10 @@
 from fastapi import Header, HTTPException, Security, status
 from fastapi.security.api_key import APIKeyHeader
-import yaml
+from dotenv import load_dotenv
+import os
 
-# read the tokens from the config file
-with open("api/config/api_key.yaml", "r") as f:
-    config = yaml.safe_load(f)
-
-VALID_TOKENS = config["api_key"]
+load_dotenv()
+VALID_TOKENS = os.getenv("API_KEY")
 api_key = APIKeyHeader(name="X-Access-Token", scheme_name="X-Access-Token", auto_error=False)
 
 

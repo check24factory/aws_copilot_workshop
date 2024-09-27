@@ -2,12 +2,12 @@ FROM python:3.12-slim-bullseye
 
 COPY ./api/data_models ./api/data_models
 COPY ./api/iris_model ./api/iris_model
+COPY ./api/.env ./api/.env
 COPY ./api/router ./api/router
 COPY ./api/application.py ./api/application.py
 COPY ./api/ModelLoader.py ./api/ModelLoader.py
 COPY ./api/requirements.api.txt ./api/requirements.api.txt
 COPY ./api/utils.py ./api/utils.py
-COPY ./api/config ./api/config
 
 RUN pip install --no-cache-dir -r api/requirements.api.txt
 

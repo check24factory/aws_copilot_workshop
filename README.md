@@ -134,3 +134,34 @@ curl -X 'POST' 'http://127.0.0.1:8000/classify_iris' \
   "petal_width": 0.2
 }'
 ```
+
+### Locust
+--draft-- \
+test api_locally
+```bash
+# create a network
+docker network create iris-network
+
+# start api locally
+docker build -t iris-api .
+docker run --name iris-api --network iris-network -p 8000:8000 iris-api
+
+# start locust locally
+docker run -p 8089:8089 \                                                                                                                                   ok | aws_copilot_workshop py | 18:31:51
+           -v $PWD/test/load_testing:/mnt/locust \
+           --name iris-locust \
+           --network iris-network \
+           locustio/locust -f /mnt/locust/locustfile.py
+
+```
+
+test hosted api
+```bash
+docker ps -q --filter "name=iris-locust" | grep -q . && docker stop iris-locust
+docker build -t custom-locust -f Dockerfile.locust . && \
+docker run -p 8089:8089 \
+           -v $PWD/test/load_testing:/mnt/locust \
+           --name iris-locust-new \
+           --network iris-network \
+           custom-locust -f /mnt/locust/locustfile.py
+```

@@ -1,0 +1,4 @@
+FROM locustio/locust
+
+COPY api/.env ./api/.env
+RUN pip install python-dotenv

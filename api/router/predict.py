@@ -12,6 +12,7 @@ iris_model = ModelLoader(model_path="api/iris_model")
 @router.post("/classify_iris", response_model=PredictionResponse)
 async def predict(request: PredictionRequest, token: str = Depends(validate_token)):
     try:
+        print("Request: ", request)
         # Prepare data for prediction
         data = pd.DataFrame([{
             'sepal_length': request.sepal_length,
@@ -22,6 +23,8 @@ async def predict(request: PredictionRequest, token: str = Depends(validate_toke
 
         # Make predictions
         predictions = iris_model.predict(data)
+
+        print("Predictions: ", predictions)
 
         # Return predictions in response
         return PredictionResponse(predictions=predictions.tolist())

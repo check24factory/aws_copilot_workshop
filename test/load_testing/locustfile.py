@@ -18,7 +18,7 @@ class UserBehavior(TaskSet):
         }
 
         # Define the JSON body to match your curl request
-        data = {
+        json_data = {
             "sepal_length": 1,
             "sepal_width": 1,
             "petal_length": 1,
@@ -26,7 +26,7 @@ class UserBehavior(TaskSet):
         }
 
         # Perform POST request to the /classify_iris endpoint
-        self.client.post("/classify_iris", data=data, headers=headers)
+        self.client.post("/classify_iris", json=json_data, headers=headers)
 
 
 class IrisAPIUser(HttpUser):

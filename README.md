@@ -161,7 +161,6 @@ docker ps -q --filter "name=iris-locust" | grep -q . && docker stop iris-locust
 docker build -t custom-locust -f Dockerfile.locust . && \
 docker run -p 8089:8089 \
            -v $PWD/test/load_testing:/mnt/locust \
-           --name iris-locust-new \
-           --network iris-network \
+           --name iris-locust \
            custom-locust -f /mnt/locust/locustfile.py
 ```

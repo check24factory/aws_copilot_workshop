@@ -1,6 +1,7 @@
 from locust import HttpUser, TaskSet, task, between
 from dotenv import load_dotenv
 import os
+import random
 from pathlib import Path
 
 load_dotenv(Path(os.getcwd()) / "api/.env")
@@ -19,10 +20,10 @@ class UserBehavior(TaskSet):
 
         # Define the JSON body to match your curl request
         json_data = {
-            "sepal_length": 1,
-            "sepal_width": 1,
-            "petal_length": 1,
-            "petal_width": 1
+            "sepal_length": random.randint(1, 25),
+            "sepal_width": random.randint(1, 25),
+            "petal_length": random.randint(1, 25),
+            "petal_width": random.randint(1, 25)
         }
 
         # Perform POST request to the /classify_iris endpoint
